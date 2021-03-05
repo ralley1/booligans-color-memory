@@ -1,15 +1,14 @@
 % Boilerplate
-% Clear all screens and figures as well as all variables in the workspace
 sca;
 close all;
 clear all;
 % Skip some tests in case your initial ScreenTest command failed. Ignore
 %otherwise
 Screen('Preference', 'SkipSyncTests', 1);
-% Here we call some default settings for setting up Psychtoolbox
+% Default settings for Psychtoolbox
 PsychDefaultSetup(2);
 
-% Get the screen numbers. This gives us a number for each of the screens
+%Get the screen numbers. This gives us a number for each of the screens
 %attached to your computer. The default should be 0.
 screens = Screen('Screens');
 % Find the maximum screen number - if there are two screens attached to
@@ -28,13 +27,43 @@ DrawFormattedText(window, 'Hello! Thank you for participating in our experiment.
 Screen('Flip', window);
 KbStrokeWait;
 
+%Red Block
 Screen('TextSize', window, 40);
 Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, '34, 19, 72, 51, 83, 86, 17','center','center',[1,0,0]); 
 Screen('Flip', window);
 KbStrokeWait;
 
+%Green Block
+Screen('TextSize', window, 40);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, '55, 23, 87, 46, 92, 15, 39','center','center',[0,1,0]); 
+Screen('Flip', window);
+KbStrokeWait;
+
+%Blue Block
+Screen('TextSize', window, 40);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, '64, 13, 75, 52, 97, 22, 48','center','center',[0,0,1]); 
+Screen('Flip', window);
+KbStrokeWait;
+
+%Black Block
+Screen('TextSize', window, 40);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, '29, 16, 85, 61, 33, 86, 96','center','center',[0,0,0]); 
+Screen('Flip', window);
+KbStrokeWait;
 
 
+%for i = 1:4
+	%Display one of the color blocks
+	%display intermediate screen asking individual to count backwards by 3s from randi > 30
+	% display screen asking individual to type in recalled string of numbers in order, recording the time it takes to submit as well as how accurate their input is
+        %reply = Ask(window, ‘Please type as much of the string you remember, in order.’, [1 1 1], [background color], ‘GetString’, ‘center’, ‘bottom’)
+	%loop back through until all blocks are presented
+%end
+%Results screen with plot of reaction time and accuracy
+%Screen saying thank you for playing!
 
 sca;

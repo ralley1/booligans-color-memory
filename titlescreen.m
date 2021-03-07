@@ -28,7 +28,6 @@ black = [0 0 0];
 colRect = {red green blue black};
 col_rand = colRect(randperm(length(colRect)));
 
-
 [window, windowRect] = PsychImaging('OpenWindow', screenNumber, grey);
 Screen('TextSize', window, 20);
 Screen('TextFont', window, 'Courier');
@@ -36,17 +35,18 @@ DrawFormattedText(window, 'Hello! Thank you for participating in our experiment.
 Screen('Flip', window);
 KbStrokeWait;
 
-
-
-
-
-%Red Block
 for ii = 1:4
     str_dig = num2str(randi([10 99], 1, 7));
     
     Screen('TextSize', window, 40);
     Screen('TextFont', window, 'Courier');
     DrawFormattedText(window, str_dig ,'center','center', red); 
+    Screen('Flip', window);
+    KbStrokeWait;
+    
+    Screen('TextSize', window, 30);
+    Screen('TextFont', window, 'Courier');
+    DrawFormattedText(window, 'Please count backwards from 60 by threes until the next screen is displayed.', 'center', 'center', [1 1 1]);
     Screen('Flip', window);
     KbStrokeWait;
     
@@ -57,6 +57,14 @@ for ii = 1:4
     Screen('Flip', window);
     KbStrokeWait;
 end
+
+%Results screen with plot of reaction time and accuracy
+
+Screen('TextSize', window, 40);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, 'Thanks for playing!', 'center', 'center', [1 1 1]);
+Screen('Flip', window);
+KbStrokeWait;
 
 %[string,terminatorChar] = GetEchoString(window,'type!','center','center',[1,1,1],[],[useKbCheck == 0],[deviceIndex],[untilTime == inf]);
     
@@ -77,7 +85,6 @@ Screen('Flip', window);
 KbStrokeWait;
 
 %}
-
 
 %{
 

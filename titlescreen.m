@@ -17,8 +17,17 @@ screens = Screen('Screens');
 screenNumber = max(screens);
 % Define white, black, and grey using the luminance values for the display.
 white = WhiteIndex(screenNumber);
-black = BlackIndex(screenNumber);
-grey = white/2;mhh
+noir = BlackIndex(screenNumber);
+grey = white/2;
+
+red = [1 0 0];
+green = [0 1 0];
+blue = [0 0 1];
+black = [0 0 0];
+
+colRect = {red green blue black};
+col_rand = colRect(randperm(length(colRect)));
+
 
 [window, windowRect] = PsychImaging('OpenWindow', screenNumber, grey);
 Screen('TextSize', window, 20);
@@ -27,12 +36,50 @@ DrawFormattedText(window, 'Hello! Thank you for participating in our experiment.
 Screen('Flip', window);
 KbStrokeWait;
 
+
+
+
+
 %Red Block
+for ii = 1:4
+    str_dig = num2str(randi([10 99], 1, 7));
+    
+    Screen('TextSize', window, 40);
+    Screen('TextFont', window, 'Courier');
+    DrawFormattedText(window, str_dig ,'center','center', red); 
+    Screen('Flip', window);
+    KbStrokeWait;
+    
+    Screen('TextSize', window, 40);
+    Screen('TextFont', window, 'Courier');
+    DrawFormattedText(window, 'Please type as much of the string you remember, in order. \n (Hit Enter when finished!)','center','center',[1,1,1]);
+    reply = Ask(window, 'Your Input: ', [1 1 1], grey, 'GetChar', RectLeft, RectBottom);
+    Screen('Flip', window);
+    KbStrokeWait;
+end
+
+%[string,terminatorChar] = GetEchoString(window,'type!','center','center',[1,1,1],[],[useKbCheck == 0],[deviceIndex],[untilTime == inf]);
+    
+%{
 Screen('TextSize', window, 40);
 Screen('TextFont', window, 'Courier');
-DrawFormattedText(window, '34, 19, 72, 51, 83, 86, 17','center','center',[1,0,0]); 
+DrawFormattedText(window, 'Please type as much of the string you remember, in order. \n (Hit Enter when finished!)','center','center',[1,1,1]);
+reply = Ask(window, 'Your Input: ', [1 1 1], grey, 'GetChar', RectLeft, RectBottom);
 Screen('Flip', window);
 KbStrokeWait;
+
+Screen('TextSize', window, 40);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, 'this is a check to make sure reply stores the right data' ,'top','center',[1,1,1]);
+DrawFormattedText(window, reply ,'center','center',[1,1,1]);
+
+Screen('Flip', window);
+KbStrokeWait;
+
+%}
+
+
+%{
 
 %Green Block
 Screen('TextSize', window, 40);
@@ -55,7 +102,6 @@ DrawFormattedText(window, '29, 16, 85, 61, 33, 86, 96','center','center',[0,0,0]
 Screen('Flip', window);
 KbStrokeWait;
 
-
 %for i = 1:4
 	%Display one of the color blocks
 	%display intermediate screen asking individual to count backwards by 3s from randi > 30
@@ -65,5 +111,8 @@ KbStrokeWait;
 %end
 %Results screen with plot of reaction time and accuracy
 %Screen saying thank you for playing!
+%}
+
+
 
 sca;

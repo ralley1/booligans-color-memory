@@ -30,6 +30,10 @@ black = [0 0 0];
 colRect = {red green blue black};
 col_rand = colRect(randperm(length(colRect)));
 
+%creates blank arrays for storing response time and accuracy
+rT = [];
+accuracy = [];
+
 %Displays intro page
 [window, windowRect] = PsychImaging('OpenWindow', screenNumber, grey);
 Screen('TextSize', window, 20);
@@ -46,24 +50,36 @@ for ii = 1:4
     Screen('TextFont', window, 'Courier');
     DrawFormattedText(window, str_dig ,'center','center', col_rand{ii}); 
     Screen('Flip', window);
-    KbStrokeWait;
+    WaitSecs(15);
     
     Screen('TextSize', window, 30);
     Screen('TextFont', window, 'Courier');
     DrawFormattedText(window, 'Please count backwards from 60 by threes until the next screen is displayed.', 'center', 'center', [1 1 1]);
     Screen('Flip', window);
-    KbStrokeWait;
+    WaitSecs(10);
     
     Screen('TextSize', window, 40);
     Screen('TextFont', window, 'Courier');
     DrawFormattedText(window, 'Please type as much of the string you remember, in order. \n (Hit Enter when finished!)','center','center',[1,1,1]);
+    %tic;
     reply = Ask(window, 'Your Input: ', [1 1 1], grey, 'GetChar', RectLeft, RectBottom);
+    %elapsedTime = toc;
+    %rT = [rT, elapsedTime];
+    %x = strsplit(str_dig);
+    %y = strsplit(reply);
+    %num_correct = 0;
+    %for i = 1:length(y)
+        %tf = strcmp(x, y(i))
+        %z = find(tf == 1);
+        %num_correct = num_correct + length(z);
+    %end
+    %accuracy = [accuracy, num_correct];
     Screen('Flip', window);
     KbStrokeWait;
     
 end
 
-%Results screen with plot of reaction time and accuracy
+%Results screen with plot of reaction time (rT) and accuracy (accuracy)
 
 Screen('TextSize', window, 40);
 Screen('TextFont', window, 'Courier');

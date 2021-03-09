@@ -50,32 +50,39 @@ for ii = 1:4
     Screen('TextFont', window, 'Courier');
     DrawFormattedText(window, str_dig ,'center','center', col_rand{ii}); 
     Screen('Flip', window);
-    WaitSecs(15);
+    WaitSecs(10);
     
     Screen('TextSize', window, 30);
     Screen('TextFont', window, 'Courier');
     DrawFormattedText(window, 'Please count backwards from 60 by threes until the next screen is displayed.', 'center', 'center', [1 1 1]);
     Screen('Flip', window);
-    WaitSecs(10);
+    WaitSecs(1);
     
     Screen('TextSize', window, 40);
     Screen('TextFont', window, 'Courier');
     DrawFormattedText(window, 'Please type as much of the string you remember, in order. \n (Hit Enter when finished!)','center','center',[1,1,1]);
-    %tic;
-    reply = Ask(window, 'Your Input: ', [1 1 1], grey, 'GetChar', RectLeft, RectBottom);
-    %elapsedTime = toc;
-    %rT = [rT, elapsedTime];
-    %x = strsplit(str_dig);
-    %y = strsplit(reply);
-    %num_correct = 0;
-    %for i = 1:length(y)
-        %tf = strcmp(x, y(i))
-        %z = find(tf == 1);
-        %num_correct = num_correct + length(z);
-    %end
-    %accuracy = [accuracy, num_correct];
+    tic;
+    %reply = Ask(window, 'Your Input: ', [1 1 1], grey, 'GetChar', RectLeft, RectBottom);
+    reply = Ask(window, 'Your Input: ', [1 1 1], grey, 'GetChar', [600 400 400 600]);
+    elapsedTime = toc;
+    Screen('TextSize', window, 40);
+    Screen('TextFont', window, 'Courier');
+    DrawFormattedText(window, 'Press Any Key','center','center',[1,1,1]);
+     
+    
+
+    rT = [rT, elapsedTime];
+    x = strsplit(str_dig);
+    y = strsplit(reply);
+    num_correct = 0;
+    for i = 1:length(y)
+        tf = strcmp(x, y(i));
+        z = find(tf == 1);
+        num_correct = num_correct + length(z);
+    end
+    accuracy = [accuracy, num_correct];
     Screen('Flip', window);
-    KbStrokeWait;
+    KbStrokeWait
     
 end
 
@@ -89,6 +96,9 @@ KbStrokeWait;
 
 %[string,terminatorChar] = GetEchoString(window,'type!','center','center',[1,1,1],[],[useKbCheck == 0],[deviceIndex],[untilTime == inf]);
     
+
+
+
 %{
 Screen('TextSize', window, 40);
 Screen('TextFont', window, 'Courier');

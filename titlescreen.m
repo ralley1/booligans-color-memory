@@ -20,14 +20,17 @@ white = WhiteIndex(screenNumber);
 noir = BlackIndex(screenNumber);
 grey = white/2;
 
+%Initializes colors
 red = [1 0 0];
 green = [0 1 0];
 blue = [0 0 1];
 black = [0 0 0];
 
+%Creates array of colors, then randomizes order
 colRect = {red green blue black};
 col_rand = colRect(randperm(length(colRect)));
 
+%Displays intro page
 [window, windowRect] = PsychImaging('OpenWindow', screenNumber, grey);
 Screen('TextSize', window, 20);
 Screen('TextFont', window, 'Courier');
@@ -35,12 +38,13 @@ DrawFormattedText(window, 'Hello! Thank you for participating in our experiment.
 Screen('Flip', window);
 KbStrokeWait;
 
+%Shows each test screen in a loop
 for ii = 1:4
     str_dig = num2str(randi([10 99], 1, 7));
     
     Screen('TextSize', window, 40);
     Screen('TextFont', window, 'Courier');
-    DrawFormattedText(window, str_dig ,'center','center', red); 
+    DrawFormattedText(window, str_dig ,'center','center', col_rand{ii}); 
     Screen('Flip', window);
     KbStrokeWait;
     
@@ -56,6 +60,7 @@ for ii = 1:4
     reply = Ask(window, 'Your Input: ', [1 1 1], grey, 'GetChar', RectLeft, RectBottom);
     Screen('Flip', window);
     KbStrokeWait;
+    
 end
 
 %Results screen with plot of reaction time and accuracy

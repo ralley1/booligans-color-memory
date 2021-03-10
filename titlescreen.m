@@ -68,8 +68,6 @@ for ii = 1:4
     Screen('TextSize', window, 40);
     Screen('TextFont', window, 'Courier');
     DrawFormattedText(window, 'Press Any Key','center','center',[1,1,1]);
-     
-    
 
     rT = [rT, elapsedTime];
     x = strsplit(str_dig);
@@ -87,6 +85,30 @@ for ii = 1:4
 end
 
 %Results screen with plot of reaction time (rT) and accuracy (accuracy)
+colors = {col_rand};
+a = categorical(colors);
+a = reordercats(x, colors);
+b1 = accuracy;
+b2 = rT;
+ 
+results = figure;
+ 
+subplot(1,2,1);
+bar(a, b1, 0.75, 'k');
+title('Accuracy');
+xlabel('color of text');
+ylabel('number of correct responses');
+ 
+subplot(1,2,2);
+bar(a, b2, 0.75, 'k');
+title('Response Time');
+xlabel('color of text');
+ylabel('seconds');
+ 
+figureTexture = Screen('MakeTexture', window, results);
+Screen('DrawTexture', window, figureTexture, [], [], 0);
+Screen('Flip', window);
+KbStrokeWait;
 
 Screen('TextSize', window, 40);
 Screen('TextFont', window, 'Courier');

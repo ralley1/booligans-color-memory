@@ -87,7 +87,7 @@ end
 %Results screen with plot of reaction time (rT) and accuracy (accuracy)
 colors = {col_rand};
 a = categorical(colors);
-a = reordercats(x, colors);
+a = reordercats(a, colors);
 b1 = accuracy;
 b2 = rT;
  
